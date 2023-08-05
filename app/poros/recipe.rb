@@ -1,7 +1,7 @@
 class Recipe
-  attr_reader
+  attr_reader :id, :type, :title, :url, :country, :image
   def initialize(data, country)
-    @id = null
+    @id = nil
     @type = "recipe"
     @title = data[:recipe][:label]
     @url = data[:recipe][:uri]
