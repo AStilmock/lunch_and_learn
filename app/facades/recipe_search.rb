@@ -5,6 +5,8 @@ class RecipeSearch
 
   def recipes_by_country(country)
     request = service.recipes_by_country(country)
-    require 'pry'; binding.pry
+    @recipes = request[:hits].map do |data|
+      Recipe.new(data, country)
+    end
   end
 end
