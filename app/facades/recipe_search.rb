@@ -1,6 +1,6 @@
 class RecipeSearch
   def service
-    service = RecipeService.new
+    RecipeService.new
   end
 
   def recipes_by_country(country)

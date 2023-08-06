@@ -1,3 +1,8 @@
 class RecipeSerializer
-  atrributes: type, title, url, country, image
+  include JSONAPI::Serializer
+  attributes :id, :title, :url, :country, :image
+  
+  # def :id
+  #   nil
+  # end
 end
