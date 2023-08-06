@@ -12,7 +12,7 @@ class RecipeService
   end
 
   def recipes_by_country(country)
-    get_url("/recipes/v2?type=public&q=#{country}")
+    get_url("?type=public&q=#{country}")
   end
 end
 

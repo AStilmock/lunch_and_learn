@@ -13,13 +13,13 @@ RSpec.describe Recipe do
       country = "france"
 
       recipe = Recipe.new(data, country)
-      expect(recipe).to be_a(Recipe)
-      expect(recipe.id).to be_nil
-      expect(recipe.type).to eq("recipe")
-      expect(recipe.title).to eq("escargot")
-      expect(recipe.url).to eq("otherurl.url")
-      expect(recipe.country).to eq("france")
-      expect(recipe.image).to eq("url.url")
+      expect(recipe).to be_a Recipe
+      expect(recipe.id).to eq "null"
+      expect(recipe.type).to eq "recipe"
+      expect(recipe.title).to eq "escargot"
+      expect(recipe.url).to eq "otherurl.url"
+      expect(recipe.country).to eq "france"
+      expect(recipe.image).to eq "url.url" 
     end
   end
 end
