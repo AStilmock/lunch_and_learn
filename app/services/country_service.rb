@@ -1,6 +1,6 @@
 class CountryService
   def conn
-    Faraday.new(url: 'https://restcountries.com/v3.1')
+    Faraday.new(url: "https://restcountries.com")
   end
 
   def get_url(url)
@@ -8,7 +8,7 @@ class CountryService
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def get_country(country)
-    get_url("/name/#{country}?fullText=true")
+  def get_country
+    country_list = get_url("/v3.1/all")
   end
 end
