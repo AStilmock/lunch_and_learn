@@ -1,9 +1,6 @@
 class CountryService
   def conn
-    Faraday.new(url: 'https://restcountries.com/v3.1') do |f|
-      f.params['app_id'] = ENV['recID']
-      f.params['app_key'] = ENV['recikey']
-    end
+    Faraday.new(url: 'https://restcountries.com/v3.1')
   end
 
   def get_url(url)
