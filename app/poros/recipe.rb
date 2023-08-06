@@ -4,7 +4,7 @@ class Recipe
     @id = nil
     @type = "recipe"
     @title = data[:recipe][:label]
-    @url = data[:recipe][:uri]
+    @url = data[:recipe][:url]
     @country = country
     @image = data[:recipe][:image]
   end
