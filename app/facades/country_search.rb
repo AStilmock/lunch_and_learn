@@ -5,6 +5,6 @@ class CountrySearch
 
   def get_country
     request = service.get_country
-    @country = Country.new(request[:name][:common])
+    @country = Country.new(request.first[:name][:common])
   end
 end

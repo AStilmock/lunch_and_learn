@@ -5,8 +5,7 @@ class Api::V1::RecipesController < ApplicationController
       render json: RecipeSerializer.new(recipes)
     else
       country = CountrySearch.new.get_country
-      country_name = country.name
-      recipes = RecipeSearch.new.recipes_by_country(country_name)
+      recipes = RecipeSearch.new.recipes_by_country(country)
       render json: RecipeSerializer.new(recipes)
     end
   end
