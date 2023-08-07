@@ -10,6 +10,6 @@ class CountrySearch
 
   def capital_city(country)
     request = service.get_one_country(country)
-    CountryPoro.new(request[:capital].first)
+    CountryPoro.new(request.first[:capital].first)
   end
 end
