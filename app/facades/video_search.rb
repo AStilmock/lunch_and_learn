@@ -4,8 +4,7 @@ class VideoSearch
   end
 
   def videos
-    service.get_videos.map do |video_data|
-      Video.new(video_data)
-    end
+    request = service.get_videos[:items].first
+    Video.new(request)
   end
 end

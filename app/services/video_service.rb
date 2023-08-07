@@ -1,11 +1,12 @@
 class VideoService
   def conn
     Faraday.new(url: 'https://youtube.googleapis.com/youtube/v3/search') do |f|
-    f.params['key'] = ENV['YT_HISTORKEY']
+      f.params['key'] = ENV['YT_HISTORKEY']
+    end
   end
 
   def get_url(url)
-    reponse = conn.get(url)
+    response = conn.get(url)
     JSON.parse(response.body, symbolize_names: true)
   end
 

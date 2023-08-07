@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Air Quality PORO' do
-  describe 'AirQuatlity' do
+  describe 'AirQuality' do
     it 'exists and has attributes' do
       data = {
         :overall_aqi => 102,
