@@ -4,8 +4,8 @@ RSpec.describe RecipeSearch do
   describe 'recipe search facade' do
     it 'returns recipes by country' do
       json_response = File.read('spec/fixtures/recipes/france_recipes.json')
-      stub_request(:get, "https://api.edamam.com/api?app_id=aefdc154&app_key=e1630b1eb84bc7c2a45d0ad75126bc2e&q=france&type=public").
-        to_return(status: 200, body: json_response)
+      stub_request(:get, "https://api.edamam.com/api/recipes/v2?app_id=#{ENV['recID']}&app_key=#{ENV['recikey']}&q=france&type=public")
+      .to_return(status: 200, body: json_response)
       @recipes = RecipeSearch.new.recipes_by_country("france")
 
       expect(@recipes).to be_an(Array)
