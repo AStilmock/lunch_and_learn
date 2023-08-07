@@ -8,7 +8,11 @@ class CountryService
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def get_country
-    country_list = get_url("/v3.1/all")
+  def get_country   
+    get_url("/v3.1/all")
+  end
+
+  def get_one_country(country)
+    get_url("/v3.1/name/#{country}?fullText=true")
   end
 end
