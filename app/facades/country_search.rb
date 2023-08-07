@@ -5,10 +5,12 @@ class CountrySearch
 
   def get_country
     request = service.get_country
-    @country = Country.new(request[:name][:common])
+    Country.new(request[:name][:common])
   end
 
   def capital_city(country)
     request = service.get_one_country
+    require 'pry'; binding.pry
+    Country.new(request[:capital])
   end
 end

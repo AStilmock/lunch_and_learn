@@ -13,4 +13,11 @@ RSpec.describe CountryService do
       expect(@country).to eq "France"
     end
   end
+
+  it "gets capital city" do
+    json_response = File.read('spec/fixtures/countries/france_search.json')
+    stub_request(:get, "https://restcountries.com/v3.1/all")
+    .to_return(status: 200, body: json_response)
+    country_data = CountryService.new.get_country
+  end
 end

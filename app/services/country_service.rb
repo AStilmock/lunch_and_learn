@@ -8,7 +8,7 @@ class CountryService
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def get_country
+  def get_country   
     get_url("/v3.1/all")
   end
 
