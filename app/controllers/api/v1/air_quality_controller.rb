@@ -4,7 +4,7 @@ class Api::V1::AirQualityController < ApplicationController
       air = AirQualitySearch.new.city_air_quality(params[:city])
       render json: AirQualitySerializer.new(air)
     else
-      city_name = CountrySearch.new.capital_city(params[:country])
+      city_name = CountrySearch.new.capital_city(params[:country].downcase)
       city = city_name.city
       air = AirQualitySearch.new.city_air_quality(city)
       render json: AirQualitySerializer.new(air)
