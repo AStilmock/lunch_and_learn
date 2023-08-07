@@ -9,8 +9,7 @@ class CountrySearch
   end
 
   def capital_city(country)
-    request = service.get_one_country
-    require 'pry'; binding.pry
-    Country.new(request[:capital])
+    request = service.get_one_country(country)
+    CountryPoro.new(request[:capital].first)
   end
 end

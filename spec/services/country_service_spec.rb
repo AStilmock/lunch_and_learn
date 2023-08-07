@@ -6,18 +6,21 @@ RSpec.describe CountryService do
       json_response = File.read('spec/fixtures/countries/france_search.json')
       stub_request(:get, "https://restcountries.com/v3.1/all").
         to_return(status: 200, body: json_response)
-      country_data = CountryService.new.get_country
-      @country = country_data[:name][:common]
+      country = CountryService.new.get_country[:name][:common]
+      
 
-      expect(@country).to be_a String
-      expect(@country).to eq "France"
+      expect(country).to be_a String
+      expect(country).to eq "France"
     end
   end
 
   it "gets capital city" do
     json_response = File.read('spec/fixtures/countries/france_search.json')
-    stub_request(:get, "https://restcountries.com/v3.1/all")
+    stub_request(:get, "https://restcountries.com/v3.1/name/france?fullText=true")
     .to_return(status: 200, body: json_response)
-    country_data = CountryService.new.get_country
+    city = CountrySearch.new.capital_city("france").city
+
+    expect(city).to be_a String
+    expect(city).to eq "Paris"
   end
 end

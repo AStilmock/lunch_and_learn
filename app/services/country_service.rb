@@ -13,6 +13,6 @@ class CountryService
   end
 
   def get_one_country(country)
-    get_url("https://restcountries.com/v3.1/name/#{country}?fullText=true")
+    get_url("/v3.1/name/#{country}?fullText=true")
   end
 end
