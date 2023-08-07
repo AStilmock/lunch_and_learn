@@ -9,6 +9,10 @@ class CountryService
   end
 
   def get_country
-    country_list = get_url("/v3.1/all")
+    get_url("/v3.1/all")
+  end
+
+  def get_one_country(country)
+    get_url("https://restcountries.com/v3.1/name/#{country}?fullText=true")
   end
 end
