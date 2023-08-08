@@ -10,7 +10,7 @@ class ImageService
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def get_photos(data)
+  def get_images(data)
     get_url("/search/photos?query=#{data}")
   end
 end
