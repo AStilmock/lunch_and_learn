@@ -14,7 +14,7 @@ RSpec.describe 'Video PORO' do
       video_data = Video.new(data)
       expect(video_data).to be_a Video
       expect(video_data.title).to eq "video title"
-      expect(video_data.video_id).to eq "Video ID"
+      expect(video_data.youtube_video_id).to eq "Video ID"
     end
   end
 end
