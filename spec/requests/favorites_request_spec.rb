@@ -12,7 +12,6 @@ RSpec.describe 'Save favorite recipes' do
       }
       post '/api/v1/favorites', params: data, headers: { 'Accept': 'application/json' }
       response_info = JSON.parse(response.body, symbolize_names: true)
-      # require 'pry'; binding.pry
       expect(response).to be_successful
       expect(response.status).to eq(200)
       expect(response_info[:success]).to eq "Favorite added successfully"
