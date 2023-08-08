@@ -4,8 +4,8 @@ RSpec.describe RecipeService do
   describe 'recipe api request response' do
     it 'returns a response' do
       json_response = File.read('spec/fixtures/recipes/france_recipes.json')
-      stub_request(:get, "https://api.edamam.com/api/recipes/v2?app_id=#{ENV['recID']}4&app_key=#{ENV['recikey']}&q=france&type=public").
-        to_return(status: 200, body: json_response)
+      stub_request(:get, "https://api.edamam.com/api/recipes/v2?app_id=#{ENV['recID']}&app_key=#{ENV['recikey']}&q=france&type=public")
+      .to_return(status: 200, body: json_response)
       @recipes = RecipeService.new.recipes_by_country("france")[:hits]
       
       expect(@recipes).to be_an(Array)
