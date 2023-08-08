@@ -5,7 +5,7 @@ RSpec.describe 'Register New User' do
     it 'can register user in database' do
       data = {
         "name": "email",
-        "email": "email@email.com",
+        "email": "email8@email.com",
         "password": "email",
         "password_confirmation": "email",
         "api_key": "1234567890"
@@ -15,14 +15,14 @@ RSpec.describe 'Register New User' do
       expect(user).to be_a User
       expect(user.id).to be_a Integer
       expect(user.name).to eq("email")
-      expect(user.email).to eq("email@email.com")
+      expect(user.email).to eq("email8@email.com")
       expect(user.password_digest).to be_a String
       expect(user.api_key).to be_a String
     end
     it 'can register a new user from post request' do
       data = {
         "name": "email",
-        "email": "email@email.com",
+        "email": "email10@email.com",
         "password": "email",
         "password_confirmation": "email"
       }
@@ -44,7 +44,7 @@ RSpec.describe 'Register New User' do
     it 'gets values from keys' do
       data = {
         "name": "email",
-        "email": "email@email.com",
+        "email": "email11@email.com",
         "password": "email",
         "password_confirmation": "email"
       }
@@ -54,7 +54,7 @@ RSpec.describe 'Register New User' do
       expect(user_info[:data][:id]).to be_a String
       expect(user_info[:data][:type]).to eq "user"
       expect(user_info[:data][:attributes][:name]).to eq "email"
-      expect(user_info[:data][:attributes][:email]).to eq "email@email.com"
+      expect(user_info[:data][:attributes][:email]).to eq "email11@email.com"
       expect(user_info[:data][:attributes][:api_key]).to be_a String
     end
   end
