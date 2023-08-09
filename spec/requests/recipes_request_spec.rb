@@ -6,7 +6,7 @@ RSpec.describe 'Recipes API' do
       json_response = File.read('spec/fixtures/recipes/france_recipes.json')
       stub_request(:get, "https://api.edamam.com/api/recipes/v2?app_id=#{ENV['recID']}&app_key=#{ENV['recikey']}&q=france&type=public")
       .to_return(status: 200, body: json_response)
-      get '/api/v1/recipes', params: {country: 'france'}, headers: { 'Accept' => 'application/json' }
+      get '/api/v1/recipes?country=france', headers: { 'Accept' => 'application/json' } #params: {country: 'france'},
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
@@ -16,7 +16,7 @@ RSpec.describe 'Recipes API' do
       json_response = File.read('spec/fixtures/recipes/france_recipes.json')
       stub_request(:get, "https://api.edamam.com/api/recipes/v2?app_id=#{ENV['recID']}&app_key=#{ENV['recikey']}&q=france&type=public")
       .to_return(status: 200, body: json_response)
-      get '/api/v1/recipes', params: {country: 'france'}, headers: { 'Accept' => 'application/json' }
+      get '/api/v1/recipes?country=france', headers: { 'Accept' => 'application/json' }
       recipes = JSON.parse(response.body, symbolize_names: true)[:data]
       expect(recipes).to be_a Array
       expect(recipes.first).to have_key :id
@@ -33,7 +33,7 @@ RSpec.describe 'Recipes API' do
       json_response = File.read('spec/fixtures/recipes/france_recipes.json')
       stub_request(:get, "https://api.edamam.com/api/recipes/v2?app_id=#{ENV['recID']}&app_key=#{ENV['recikey']}&q=france&type=public")
       .to_return(status: 200, body: json_response)
-      get '/api/v1/recipes', params: {country: 'france'}, headers: { 'Accept' => 'application/json' }
+      get '/api/v1/recipes?country=france', headers: { 'Accept' => 'application/json' }
       recipes = JSON.parse(response.body, symbolize_names: true)[:data]
 
       expect(recipes.count).to eq 20
@@ -52,7 +52,7 @@ RSpec.describe 'Recipes API' do
 
       country = Country.new("France")
       allow_any_instance_of(CountrySearch).to receive(:get_country).and_return("france")
-      get '/api/v1/recipes', params: {country: ''}, headers: { 'Accept' => 'application/json' }
+      get '/api/v1/recipes?country=france', headers: { 'Accept' => 'application/json' }
       recipes = JSON.parse(response.body, symbolize_names: true)[:data]
       expect(recipes.count).to eq 20
       expect(recipes.first[:id]).to eq "null"
@@ -65,9 +65,9 @@ RSpec.describe 'Recipes API' do
 
     it 'returns empty array for no recipe matches' do
       data = File.read('spec/fixtures/recipes/no_country_match.json')
-      stub_request(:get, "https://api.edamam.com/api/recipes/v2?app_id=#{ENV['recID']}&app_key=#{ENV['recikey']}&q=not_a_country&type=public")
+      stub_request(:get, "https://api.edamam.com/api/recipes/v2?app_id=#{ENV['recID']}&app_key=#{ENV['recikey']}&q=france&type=public")
       .to_return(status: 200, body: data.to_json)
-      get '/api/v1/recipes', params: {country: 'not_a_country'}, headers: { 'Accept' => 'application/json' } 
+      get '/api/v1/recipes?country=france', headers: { 'Accept' => 'application/json' }
       info = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
