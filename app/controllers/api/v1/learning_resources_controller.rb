@@ -2,10 +2,10 @@ class Api::V1::LearningResourcesController < ApplicationController
   def index
     image_data = ImageService.new.get_images(params[:country])[:results]
     images = image_data.map do |i|
-      Image.new(i).as_json
+      Image.new(i)
     end
     video_info = VideoService.new.get_videos[:items].first
-    video = Video.new(video_info).as_json
+    video = Video.new(video_info)
     if video_info[:snippet][:title] && video_info[:id][:videoId] == nil
       video = {}
     else

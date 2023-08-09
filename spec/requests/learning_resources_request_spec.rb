@@ -9,7 +9,7 @@ RSpec.describe 'LearningResources' do
       image = File.read('spec/fixtures/images/images.json')
       stub_request(:get, "https://api.unsplash.com/search/photos?client_id=#{ENV['UNSPLASHKEY']}&query=france")
       .to_return(status: 200, body: image)
-      get '/api/v1/learning_resources?country=france', params: {country: 'france'}, headers: { 'Accept' => 'application/json' }
+      get '/api/v1/learning_resources?country=france', headers: { 'Accept' => 'application/json' } #/api/v1/learning_resources?country=france
       data = JSON.parse(response.body, symbolize_names: true)[:data]
       expect(data).to be_a Hash
       expect(data).to have_key :id
@@ -32,7 +32,7 @@ RSpec.describe 'LearningResources' do
       image = File.read('spec/fixtures/images/images.json')
       stub_request(:get, "https://api.unsplash.com/search/photos?client_id=#{ENV['UNSPLASHKEY']}&query=france")
       .to_return(status: 200, body: image)
-      get '/api/v1/learning_resources?country=france', params: {country: 'france'}, headers: { 'Accept' => 'application/json' }
+      get '/api/v1/learning_resources?country=france', headers: { 'Accept' => 'application/json' } 
       data = JSON.parse(response.body, symbolize_names: true)[:data]
 
       expect(data[:id]).to eq "null"
