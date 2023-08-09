@@ -10,12 +10,13 @@ class Api::V1::FavoritesController < ApplicationController
   end
 
   def create
-  user = User.find_by(api_key: params[:api_key])
-  if !user.nil?
-    user.favorites.create!(fav_params)
-    render json: { "success": "Favorite added successfully" }
-  else
-    render json: { "error": "Invalid request please try again" }, status: 401
+    user = User.find_by(api_key: params[:api_key])
+    if !user.nil?
+      user.favorites.create!(fav_params)
+      render json: { "success": "Favorite added successfully" }
+    else
+      render json: { "error": "Invalid request please try again" }, status: 401
+    end
   end
 
   private
