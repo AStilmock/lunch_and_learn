@@ -23,6 +23,9 @@ RSpec.describe 'Recipes API' do
       expect(recipes.first).to have_key :type
       expect(recipes.first).to have_key :attributes
       expect(recipes.first[:attributes]).to be_a Hash
+      expect(recipes.first[:attributes]).to_not have_key :label
+      expect(recipes.first[:attributes]).to_not have_key :id
+      expect(recipes.first[:attributes]).to_not have_key :type
       expect(recipes.first[:attributes]).to have_key :title
       expect(recipes.first[:attributes]).to have_key :url
       expect(recipes.first[:attributes]).to have_key :country

@@ -9,7 +9,7 @@ RSpec.describe 'LearningResources' do
       image = File.read('spec/fixtures/images/images.json')
       stub_request(:get, "https://api.unsplash.com/search/photos?client_id=#{ENV['UNSPLASHKEY']}&query=france")
       .to_return(status: 200, body: image)
-      get '/api/v1/learning_resources?country=france', headers: { 'Accept' => 'application/json' } #/api/v1/learning_resources?country=france
+      get '/api/v1/learning_resources?country=france', headers: { 'Accept' => 'application/json' } 
       data = JSON.parse(response.body, symbolize_names: true)[:data]
       expect(data).to be_a Hash
       expect(data).to have_key :id
@@ -18,6 +18,8 @@ RSpec.describe 'LearningResources' do
       expect(data[:attributes]).to have_key :country
       expect(data[:attributes]).to have_key :video
       expect(data[:attributes]).to have_key :images
+      expect(data[:attributes]).to_not have_key :id
+      expect(data[:attributes]).to_not have_key :type
       expect(data[:attributes][:video]).to have_key :title
       expect(data[:attributes][:video]).to have_key :youtube_video_id
       expect(data[:attributes][:images]).to be_a Array
@@ -53,7 +55,6 @@ RSpec.describe 'LearningResources' do
       .to_return(status: 200, body: image)
       get '/api/v1/learning_resources?country=""', headers: { 'Accept' => 'application/json' }
       data = JSON.parse(response.body, symbolize_names: true)[:data]
-      # require 'pry'; binding.pry
       expect(response).to be_successful
       expect(response.status).to eq 200
       expect(data).to be_a Hash
