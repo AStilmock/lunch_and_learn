@@ -1,7 +1,6 @@
 class Api::V1::FavoritesController < ApplicationController
   def index
     user = User.find_by(api_key: params[:api_key])
-    # require 'pry'; binding.pry
     if user
       render json: FavoriteSerializer.new(user.favorites)
     else
@@ -22,6 +21,5 @@ class Api::V1::FavoritesController < ApplicationController
   private
   def fav_params
     params.permit(:country, :recipe_link, :recipe_title)
-    # params.require(:favorite).permit(:country, :recipe_link, :recipe_title)
   end
 end
