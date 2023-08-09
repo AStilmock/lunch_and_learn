@@ -1,16 +1,27 @@
 class Api::V1::FavoritesController < ApplicationController
+  def index
+    user = User.find_by(api_key: params[:api_key])
+    # require 'pry'; binding.pry
+    if user
+      render json: FavoriteSerializer.new(user.favorites)
+    else
+      render json: { "error": "Invalid request please try again" }, status: 401
+    end
+  end
+
   def create
     user = User.find_by(api_key: params[:api_key])
-    if !user.nil?
+    if user
       user.favorites.create!(fav_params)
       render json: { "success": "Favorite added successfully" }
     else
-      render json: { "error": "Invalid API key" }, status: 401
+      render json: { "error": "Invalid request please try again" }, status: 401
     end
   end
 
   private
   def fav_params
-    params.permit(:country, :recipe_link, :recipe_title, :user_id)
+    params.permit(:country, :recipe_link, :recipe_title)
+    # params.require(:favorite).permit(:country, :recipe_link, :recipe_title)
   end
 end
