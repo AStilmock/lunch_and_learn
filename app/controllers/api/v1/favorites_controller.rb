@@ -1,7 +1,7 @@
 class Api::V1::FavoritesController < ApplicationController
   def index
-    # require 'pry'; binding.pry
     user = User.find_by(api_key: params[:api_key])
+    # require 'pry'; binding.pry
     if user
       render json: FavoriteSerializer.new(user.favorites)
     else
