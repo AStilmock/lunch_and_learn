@@ -43,5 +43,25 @@ RSpec.describe 'LearningResources' do
       expect(data[:attributes][:images].first[:alt_tag]).to eq "group of people walking near body of water and building under blue sky at daytime"
       expect(data[:attributes][:images].first[:url]).to eq "https://images.unsplash.com/photo-1503917988258-f87a78e3c995?ixid=M3w0ODU5ODR8MHwxfHNlYXJjaHwxfHxmcmFuY2V8ZW58MHx8fHwxNjkxNDU1ODM3fDA&ixlib=rb-4.0.3"
     end
+
+    it 'returns empty hash if no videos exist' do
+      video_data = File.read('spec/fixtures/countries/empty_country.json')
+      stub_request(:get, "https://youtube.googleapis.com/youtube/v3/search?channelId=UCluQ5yInbeAkkeCndNnUhpw&key=#{ENV['YT_HISTORKEY']}&part=snippet")
+      .to_return(status: 200, body: video_data)
+      image = File.read('spec/fixtures/countries/empty_country.json')
+      stub_request(:get, "https://api.unsplash.com/search/photos?client_id=#{ENV['UNSPLASHKEY']}&query=%22%22")
+      .to_return(status: 200, body: image)
+      get '/api/v1/learning_resources?country=""', headers: { 'Accept' => 'application/json' }
+      data = JSON.parse(response.body, symbolize_names: true)[:data]
+      # require 'pry'; binding.pry
+      expect(response).to be_successful
+      expect(response.status).to eq 200
+      expect(data).to be_a Hash
+      expect(data[:id]).to eq "null"
+      expect(data[:type]).to eq "learning_resources"
+      expect(data[:attributes][:country]).to eq "\"\""
+      expect(data[:attributes][:video]).to be_a Hash
+      expect(data[:attributes][:images]).to eq []
+    end
   end
 end

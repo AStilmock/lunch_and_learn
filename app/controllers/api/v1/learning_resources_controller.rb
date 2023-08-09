@@ -4,12 +4,11 @@ class Api::V1::LearningResourcesController < ApplicationController
     images = image_data.map do |i|
       Image.new(i)
     end
-    video_info = VideoService.new.get_videos[:items].first
-    video = Video.new(video_info)
-    if video_info[:snippet][:title] && video_info[:id][:videoId] == nil
+    if VideoService.new.get_videos[:items] == nil
       video = {}
     else
-      video
+      video_info = VideoService.new.get_videos[:items].first
+      video = Video.new(video_info)
     end
     new_resource = LearningResource.new(video, images, params[:country])
     render json: LearningResourcesSerializer.new(new_resource)
