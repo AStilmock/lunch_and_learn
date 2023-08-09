@@ -4,7 +4,7 @@ class Api::V1::LearningResourcesController < ApplicationController
     images = image_data.map do |i|
       Image.new(i)
     end
-    if VideoService.new.get_videos[:items] == nil
+    if params[:country] == nil
       video = {}
     else
       video_info = VideoService.new.get_videos[:items].first

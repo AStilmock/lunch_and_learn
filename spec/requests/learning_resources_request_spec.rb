@@ -51,9 +51,9 @@ RSpec.describe 'LearningResources' do
       stub_request(:get, "https://youtube.googleapis.com/youtube/v3/search?channelId=UCluQ5yInbeAkkeCndNnUhpw&key=#{ENV['YT_HISTORKEY']}&part=snippet")
       .to_return(status: 200, body: video_data)
       image = File.read('spec/fixtures/countries/empty_country.json')
-      stub_request(:get, "https://api.unsplash.com/search/photos?client_id=#{ENV['UNSPLASHKEY']}&query=%22%22")
+      stub_request(:get, "https://api.unsplash.com/search/photos?client_id=#{ENV['UNSPLASHKEY']}&query=")
       .to_return(status: 200, body: image)
-      get '/api/v1/learning_resources?country=""', headers: { 'Accept' => 'application/json' }
+      get '/api/v1/learning_resources?country=', headers: { 'Accept' => 'application/json' }
       data = JSON.parse(response.body, symbolize_names: true)[:data]
       expect(response).to be_successful
       expect(response.status).to eq 200
